@@ -1,0 +1,950 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Save the Date — Deepak & Laasya's Wedding & Reception Celebration Invitation">
+    <meta name="theme-color" content="#FAF6F0">
+    <title>Deepak &amp; Laasya | Save The Date — Wedding Invitation</title>
+
+    <!-- Google Fonts: Cormorant Garamond (Editorial Display), Great Vibes (Handwritten Script), Plus Jakarta Sans (UI & Body), JetBrains Mono (Tabular Countdowns) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Great+Vibes&family=JetBrains+Mono:wght@400;500&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <!-- Preload Hero LCP Image -->
+    <link rel="preload" as="image" href="images/hero-couple.jpg" fetchpriority="high">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="edit-overlays-visible">
+
+    <!-- Skip to main content for keyboard accessibility -->
+    <a href="#main-content" class="skip-link">Skip to invitation details</a>
+
+    <!-- Ambient Background Canvas for Soft Petals (Daylight) & Golden Sparkles (Evening) -->
+    <canvas id="ambientCanvas" aria-hidden="true"></canvas>
+
+    <!-- Optional Custom Audio Element (also backed by Web Audio API chime synthesis) -->
+    <audio id="weddingMusic" loop preload="none">
+        <source src="images/wedding-music.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- ===================================================
+         FLOATING EDITORIAL NAVIGATION & STUDIO CONTROLS
+    ==================================================== -->
+    <header class="floating-header" id="floatingHeader">
+        <div class="header-inner">
+            <a href="#hero" class="brand-monogram" aria-label="Back to top">
+                <span data-bind="groomInitial">D</span>
+                <span class="monogram-amp">&amp;</span>
+                <span data-bind="brideInitial">L</span>
+            </a>
+
+            <nav class="chapter-nav" aria-label="Invitation sections">
+                <a href="#hero" class="nav-link active" data-section="hero">Save the Date</a>
+                <a href="#story" class="nav-link" data-section="story">Our Story</a>
+                <a href="#wedding" class="nav-link" data-section="wedding">Wedding</a>
+                <a href="#reception" class="nav-link" data-section="reception">Reception</a>
+                <a href="#gallery" class="nav-link" data-section="gallery">Gallery</a>
+            </nav>
+
+            <div class="header-actions">
+                <button type="button" id="togglePreviewModeBtn" class="icon-pill-btn" title="Toggle Guest Preview / Photo Upload Controls" aria-pressed="false">
+                    <span class="pill-icon" aria-hidden="true">👁️</span>
+                    <span class="pill-label" id="previewModeLabel">Guest View</span>
+                </button>
+
+                <button type="button" id="musicToggleBtn" class="icon-circle-btn" aria-label="Toggle ambient music" aria-pressed="false" title="Toggle Ambient Music">
+                    <span id="musicIcon" aria-hidden="true">🎵</span>
+                </button>
+
+                <button type="button" id="openEditorBtn" class="customize-pill-btn" aria-haspopup="dialog" aria-controls="editorDialog">
+                    <span aria-hidden="true">✦</span>
+                    <span>Customize</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main id="main-content">
+
+        <!-- ===================================================
+             HERO SECTION: LARGE COUPLE PHOTO, ANIMATED SAVE THE DATE,
+             ANIMATED DATE REVEAL & ENTER INVITATION BUTTON
+        ==================================================== -->
+        <section id="hero" class="hero-section" aria-label="Save the Date">
+            <!-- Full-bleed Couple Hero Image Container -->
+            <div class="hero-media-wrapper image-slot" data-photo-key="heroPhoto">
+                <div class="image-skeleton" aria-hidden="true"></div>
+                <img
+                    id="heroPhotoImg"
+                    src="images/hero-couple.jpg"
+                    alt="Deepak and Laasya portrait"
+                    class="hero-bg-image"
+                    fetchpriority="high"
+                    decoding="async"
+                >
+                <div class="hero-cinematic-vignette" aria-hidden="true"></div>
+                <div class="hero-warm-wash" aria-hidden="true"></div>
+
+                <!-- Direct Photo Upload / Replacement Control for Hero Section -->
+                <div class="photo-replace-bar hero-photo-control" role="region" aria-label="Hero couple photo controls">
+                    <label class="photo-upload-btn" tabindex="0">
+                        <span aria-hidden="true">📷</span>
+                        <span>Replace Hero Couple Photo</span>
+                        <input type="file" accept="image/*" class="sr-only-file" data-upload-target="heroPhoto" aria-label="Upload new Hero couple photo">
+                    </label>
+                    <button type="button" class="photo-url-btn" data-url-target="heroPhoto" title="Set image via URL or file path">🔗 URL</button>
+                </div>
+            </div>
+
+            <!-- Floating Handwritten Marginalia -->
+            <div class="handwritten-float hero-float-left" aria-hidden="true" data-bind="heroScriptLeft">
+                two hearts, one sacred promise...
+            </div>
+            <div class="handwritten-float hero-float-right" aria-hidden="true" data-bind="heroScriptRight">
+                forever begins here
+            </div>
+
+            <!-- Hero Editorial Content -->
+            <div class="hero-content">
+                <div class="hero-eyebrow-wrap">
+                    <span class="ornament-line" aria-hidden="true"></span>
+                    <p class="hero-eyebrow" data-bind="heroPreTitle">TOGETHER WITH THEIR FAMILIES</p>
+                    <span class="ornament-line" aria-hidden="true"></span>
+                </div>
+
+                <!-- Animated SAVE THE DATE Title -->
+                <div class="save-the-date-banner" aria-label="Save The Date">
+                    <span class="std-word" style="--word-index: 0;">
+                        <span class="std-char" style="--char-index: 0;">S</span><span class="std-char" style="--char-index: 1;">A</span><span class="std-char" style="--char-index: 2;">V</span><span class="std-char" style="--char-index: 3;">E</span>
+                    </span>
+                    <span class="std-word std-the" style="--word-index: 1;">
+                        <span class="std-char" style="--char-index: 4;">T</span><span class="std-char" style="--char-index: 5;">H</span><span class="std-char" style="--char-index: 6;">E</span>
+                    </span>
+                    <span class="std-word" style="--word-index: 2;">
+                        <span class="std-char" style="--char-index: 7;">D</span><span class="std-char" style="--char-index: 8;">A</span><span class="std-char" style="--char-index: 9;">T</span><span class="std-char" style="--char-index: 10;">E</span>
+                    </span>
+                </div>
+
+                <!-- Couple Names -->
+                <h1 class="hero-couple-names">
+                    <span class="couple-name groom-name" data-bind="groomName" data-editable-field="groomName" title="Click to edit name">Deepak</span>
+                    <span class="couple-ampersand" aria-hidden="true">&amp;</span>
+                    <span class="sr-only">and</span>
+                    <span class="couple-name bride-name" data-bind="brideName" data-editable-field="brideName" title="Click to edit name">Laasya</span>
+                </h1>
+
+                <!-- Animated Date Reveal -->
+                <div class="hero-date-reveal" id="heroDateReveal">
+                    <div class="date-reveal-shimmer" aria-hidden="true"></div>
+                    <span class="date-ornament" aria-hidden="true">✦</span>
+                    <time id="heroDateText" class="hero-date-text" datetime="2026-10-25" data-bind="heroDateDisplay" data-editable-field="heroDateDisplay" title="Click to edit date">
+                        25 • OCTOBER • 2026
+                    </time>
+                    <span class="date-ornament" aria-hidden="true">✦</span>
+                </div>
+
+                <p class="hero-subtitle" data-bind="heroTagline" data-editable-field="heroTagline">
+                    Two souls. One heart. One beautiful forever.
+                </p>
+
+                <!-- Enter Invitation CTA Button -->
+                <div class="hero-cta-group">
+                    <button type="button" id="enterInvitationBtn" class="enter-invitation-btn">
+                        <span class="btn-text">Enter Invitation</span>
+                        <span class="btn-icon-circle" aria-hidden="true">↓</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Subtle Scroll Progress Prompt -->
+            <div class="hero-scroll-indicator" aria-hidden="true">
+                <span class="scroll-line"></span>
+                <span class="scroll-caption">Scroll to unfold</span>
+            </div>
+        </section>
+
+        <!-- ===================================================
+             OUR STORY SECTION: EDITORIAL PORTRAIT & NARRATIVE
+        ==================================================== -->
+        <section id="story" class="story-section editorial-section">
+            <div class="container">
+                <div class="section-header reveal-on-scroll">
+                    <span class="chapter-kicker">Prologue • Our Journey</span>
+                    <h2 class="section-title" data-bind="storyTitle" data-editable-field="storyTitle">Once Upon A Time...</h2>
+                    <p class="handwritten-accent" data-bind="storyScript">written in the stars, sealed with love</p>
+                </div>
+
+                <div class="story-editorial-grid">
+                    <!-- Customizable Couple Story Photo -->
+                    <div class="story-photo-column reveal-on-scroll">
+                        <div class="editorial-arch-frame image-slot" data-photo-key="storyPhoto">
+                            <div class="image-skeleton" aria-hidden="true"></div>
+                            <img
+                                id="storyPhotoImg"
+                                src="images/gallery-2.jpg"
+                                alt="Deepak and Laasya walking together"
+                                class="editorial-img"
+                                loading="lazy"
+                                decoding="async"
+                            >
+                            <div class="frame-border-inset" aria-hidden="true"></div>
+
+                            <!-- Photo Replace Overlay -->
+                            <div class="photo-replace-bar">
+                                <label class="photo-upload-btn" tabindex="0">
+                                    <span aria-hidden="true">📷</span>
+                                    <span>Replace Story Photo</span>
+                                    <input type="file" accept="image/*" class="sr-only-file" data-upload-target="storyPhoto" aria-label="Upload new Story couple photo">
+                                </label>
+                                <button type="button" class="photo-url-btn" data-url-target="storyPhoto" title="Set image via URL">🔗 URL</button>
+                            </div>
+                        </div>
+                        <div class="floating-polaroid-caption" data-bind="storyPhotoCaption" data-editable-field="storyPhotoCaption">
+                            "Every step led us to each other."
+                        </div>
+                    </div>
+
+                    <!-- Story Editorial Copy -->
+                    <div class="story-text-column reveal-on-scroll">
+                        <div class="editorial-quote-mark" aria-hidden="true">“</div>
+                        <h3 class="story-subheading" data-bind="storySubheading" data-editable-field="storySubheading">
+                            And then there were two...
+                        </h3>
+                        <p class="story-paragraph" data-bind="storyParagraph1" data-editable-field="storyParagraph1">
+                            Somewhere between ordinary moments and unexpected smiles, Deepak and Laasya found something extraordinary.
+                        </p>
+                        <p class="story-paragraph" data-bind="storyParagraph2" data-editable-field="storyParagraph2">
+                            What began as a beautiful connection slowly became a journey filled with laughter, shared dreams, and timeless love. And now, surrounded by the blessings of our families and dearest friends, we are ready to begin our forever together.
+                        </p>
+
+                        <div class="story-signature-block">
+                            <span class="signature-script">With love,</span>
+                            <div class="signature-names">
+                                <span data-bind="groomName">Deepak</span> &amp; <span data-bind="brideName">Laasya</span>
+                            </div>
+                        </div>
+
+                        <!-- Quick Navigation to the Two Distinct Event Experiences -->
+                        <div class="event-jump-cards">
+                            <a href="#wedding" class="event-jump-pill jump-wedding">
+                                <span class="jump-tag">Chapter I • Daylight Floral</span>
+                                <span class="jump-name">The Wedding Ceremony →</span>
+                            </a>
+                            <a href="#reception" class="event-jump-pill jump-reception">
+                                <span class="jump-tag">Chapter II • Evening Gala</span>
+                                <span class="jump-name">The Evening Reception →</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===================================================
+             EVENT EXPERIENCE 1: THE WEDDING CEREMONY
+             (Warm Romantic Floral & Sunlit Botanical Aesthetic)
+        ==================================================== -->
+        <section id="wedding" class="event-experience wedding-experience" aria-labelledby="weddingHeading">
+            <!-- Botanical / Floral SVG Background Accents -->
+            <div class="floral-watermark floral-top-left" aria-hidden="true">
+                <svg viewBox="0 0 300 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M20 280C80 220 140 160 260 40" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+                    <path d="M90 210C70 170 95 130 135 145C115 175 100 195 90 210Z" stroke="currentColor" stroke-width="1"/>
+                    <path d="M150 150C130 110 155 70 195 85C175 115 160 135 150 150Z" stroke="currentColor" stroke-width="1"/>
+                    <path d="M120 180C160 200 200 175 185 135C155 155 135 170 120 180Z" stroke="currentColor" stroke-width="1"/>
+                    <circle cx="260" cy="40" r="6" stroke="currentColor" stroke-width="1.2"/>
+                    <circle cx="215" cy="85" r="4" fill="currentColor" fill-opacity="0.3"/>
+                </svg>
+            </div>
+
+            <!-- Floating Handwritten Annotations -->
+            <div class="handwritten-float wedding-script-float" aria-hidden="true" data-bind="weddingScriptNote">
+                under the sunlit jasmine &amp; morning blossoms...
+            </div>
+
+            <div class="container">
+                <!-- Editorial Chapter Header -->
+                <div class="experience-header reveal-on-scroll">
+                    <div class="chapter-badge wedding-badge">
+                        <span class="badge-dot" aria-hidden="true">✿</span>
+                        <span>Chapter I • Sacred Morning Union</span>
+                    </div>
+                    <h2 id="weddingHeading" class="experience-title" data-bind="weddingTitle" data-editable-field="weddingTitle">
+                        The Wedding Ceremony
+                    </h2>
+                    <p class="experience-subtitle" data-bind="weddingSubtitle" data-editable-field="weddingSubtitle">
+                        A warm, romantic celebration of sacred vows amidst blooming florals and family blessings.
+                    </p>
+                </div>
+
+                <!-- Full-Width Editorial Wedding Hero Photo Banner -->
+                <div class="experience-hero-card wedding-hero-card reveal-on-scroll">
+                    <div class="experience-hero-media image-slot" data-photo-key="weddingHeroPhoto">
+                        <div class="image-skeleton" aria-hidden="true"></div>
+                        <img
+                            id="weddingHeroPhotoImg"
+                            src="images/wedding-hero.jpg"
+                            alt="Sunlit floral wedding ceremony mandap"
+                            class="experience-hero-img"
+                            loading="lazy"
+                            decoding="async"
+                        >
+                        <div class="wedding-photo-gradient" aria-hidden="true"></div>
+
+                        <!-- On-section Photo Replacement Controls -->
+                        <div class="photo-replace-bar">
+                            <label class="photo-upload-btn" tabindex="0">
+                                <span aria-hidden="true">📷</span>
+                                <span>Replace Wedding Hero Photo</span>
+                                <input type="file" accept="image/*" class="sr-only-file" data-upload-target="weddingHeroPhoto" aria-label="Upload new Wedding ceremony hero photo">
+                            </label>
+                            <button type="button" class="photo-url-btn" data-url-target="weddingHeroPhoto" title="Set Wedding photo via URL">🔗 URL</button>
+                        </div>
+
+                        <div class="experience-photo-tag">
+                            <span>I • Sacred Ceremony</span>
+                        </div>
+                    </div>
+
+                    <!-- Wedding Details + Countdown + Venue + Google Maps Action Grid -->
+                    <div class="experience-details-grid wedding-details-surface">
+                        <!-- Left Column: Date, Time & Venue Details -->
+                        <div class="event-logistics">
+                            <div class="logistics-eyebrow">
+                                <span>CEREMONY DETAILS</span>
+                                <button type="button" class="inline-edit-trigger" data-open-editor-tab="wedding" title="Edit Wedding Details">
+                                    ✎ Edit Details
+                                </button>
+                            </div>
+
+                            <div class="detail-row">
+                                <div class="detail-icon" aria-hidden="true">📅</div>
+                                <div class="detail-body">
+                                    <span class="detail-label">Event Date</span>
+                                    <strong class="detail-value" data-bind="weddingDateText" data-editable-field="weddingDateText">25 October 2026</strong>
+                                </div>
+                            </div>
+
+                            <div class="detail-row">
+                                <div class="detail-icon" aria-hidden="true">🕰️</div>
+                                <div class="detail-body">
+                                    <span class="detail-label">Muhurtham / Time</span>
+                                    <strong class="detail-value" data-bind="weddingTimeText" data-editable-field="weddingTimeText">10:00 AM Onwards</strong>
+                                </div>
+                            </div>
+
+                            <div class="detail-row">
+                                <div class="detail-icon" aria-hidden="true">🏛️</div>
+                                <div class="detail-body">
+                                    <span class="detail-label">Wedding Venue</span>
+                                    <strong class="detail-value" data-bind="weddingVenueName" data-editable-field="weddingVenueName">Wedding Venue</strong>
+                                    <p class="detail-subvalue" data-bind="weddingVenueAddress" data-editable-field="weddingVenueAddress">Bangalore, India</p>
+                                </div>
+                            </div>
+
+                            <div class="detail-row">
+                                <div class="detail-icon" aria-hidden="true">🌸</div>
+                                <div class="detail-body">
+                                    <span class="detail-label">Aesthetic &amp; Attire Note</span>
+                                    <p class="detail-subvalue" data-bind="weddingNote" data-editable-field="weddingNote">Traditional Indian or Pastel Floral Festive Attire</p>
+                                </div>
+                            </div>
+
+                            <!-- Action Buttons: Open in Google Maps & Add to Calendar -->
+                            <div class="event-action-bar">
+                                <a
+                                    id="weddingMapLink"
+                                    href="https://www.google.com/maps/search/?api=1&query=Bangalore+India"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    class="btn-maps wedding-maps-btn"
+                                >
+                                    <span aria-hidden="true">📍</span>
+                                    <span>Open in Google Maps</span>
+                                    <span class="external-arrow" aria-hidden="true">↗</span>
+                                </a>
+
+                                <button type="button" class="btn-calendar wedding-cal-btn" data-calendar-event="wedding">
+                                    <span aria-hidden="true">🗓️</span>
+                                    <span>Save to Calendar</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Right Column: Dedicated Wedding Countdown Timer -->
+                        <div class="event-countdown-panel wedding-countdown-panel">
+                            <div class="countdown-header">
+                                <span class="countdown-kicker">COUNTING DOWN TO THE VOWS</span>
+                                <h3 class="countdown-title">Until We Say “I Do”</h3>
+                                <p class="countdown-target-label">
+                                    Target: <span data-bind="weddingDateText">25 October 2026</span> • <span data-bind="weddingTimeText">10:00 AM</span>
+                                </p>
+                            </div>
+
+                            <div class="countdown-grid" id="weddingCountdown" role="timer" aria-live="polite" aria-label="Countdown to the Wedding Ceremony">
+                                <div class="countdown-cell">
+                                    <span class="countdown-number" id="weddingDays">00</span>
+                                    <span class="countdown-unit">Days</span>
+                                </div>
+                                <div class="countdown-sep" aria-hidden="true">:</div>
+                                <div class="countdown-cell">
+                                    <span class="countdown-number" id="weddingHours">00</span>
+                                    <span class="countdown-unit">Hours</span>
+                                </div>
+                                <div class="countdown-sep" aria-hidden="true">:</div>
+                                <div class="countdown-cell">
+                                    <span class="countdown-number" id="weddingMinutes">00</span>
+                                    <span class="countdown-unit">Minutes</span>
+                                </div>
+                                <div class="countdown-sep" aria-hidden="true">:</div>
+                                <div class="countdown-cell">
+                                    <span class="countdown-number" id="weddingSeconds">00</span>
+                                    <span class="countdown-unit">Seconds</span>
+                                </div>
+                            </div>
+
+                            <p class="countdown-status-msg" id="weddingCountdownStatus">
+                                Every heartbeat brings us closer to this sacred morning.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===================================================
+             CINEMATIC DAY-TO-NIGHT ATMOSPHERIC TRANSITION
+        ==================================================== -->
+        <div class="day-to-night-bridge" aria-hidden="true">
+            <div class="bridge-inner reveal-on-scroll">
+                <div class="celestial-divider">
+                    <span class="sun-emblem">☀</span>
+                    <span class="bridge-line"></span>
+                    <span class="moon-emblem">☾</span>
+                </div>
+                <p class="bridge-script" data-bind="transitionQuote">
+                    As golden sunlight fades into velvet starlight, the celebration continues...
+                </p>
+            </div>
+        </div>
+
+        <!-- ===================================================
+             EVENT EXPERIENCE 2: THE EVENING RECEPTION
+             (Dramatic Evening Celebration & Candlelit Gala Aesthetic)
+        ==================================================== -->
+        <section id="reception" class="event-experience reception-experience" aria-labelledby="receptionHeading">
+            <!-- Starlight / Chandelier Geometric Accents -->
+            <div class="starlight-glow-orb orb-1" aria-hidden="true"></div>
+            <div class="starlight-glow-orb orb-2" aria-hidden="true"></div>
+
+            <!-- Floating Handwritten Annotations -->
+            <div class="handwritten-float reception-script-float" aria-hidden="true" data-bind="receptionScriptNote">
+                music, champagne toasts &amp; dancing under the stars...
+            </div>
+
+            <div class="container">
+                <!-- Editorial Chapter Header -->
+                <div class="experience-header reveal-on-scroll">
+                    <div class="chapter-badge reception-badge">
+                        <span class="badge-dot" aria-hidden="true">✦</span>
+                        <span>Chapter II • Candlelit Evening Soirée</span>
+                    </div>
+                    <h2 id="receptionHeading" class="experience-title reception-title" data-bind="receptionTitle" data-editable-field="receptionTitle">
+                        The Evening Reception
+                    </h2>
+                    <p class="experience-subtitle reception-subtitle" data-bind="receptionSubtitle" data-editable-field="receptionSubtitle">
+                        An enchanting night of music, laughter, fine dining, and celebration under the chandeliers.
+                    </p>
+                </div>
+
+                <!-- Full-Width Editorial Reception Hero Photo Banner -->
+                <div class="experience-hero-card reception-hero-card reveal-on-scroll">
+                    <div class="experience-hero-media image-slot" data-photo-key="receptionHeroPhoto">
+                        <div class="image-skeleton" aria-hidden="true"></div>
+                        <img
+                            id="receptionHeroPhotoImg"
+                            src="images/reception-hero.jpg"
+                            alt="Candlelit evening wedding reception celebration"
+                            class="experience-hero-img"
+                            loading="lazy"
+                            decoding="async"
+                        >
+                        <div class="reception-photo-gradient" aria-hidden="true"></div>
+
+                        <!-- On-section Photo Replacement Controls -->
+                        <div class="photo-replace-bar">
+                            <label class="photo-upload-btn" tabindex="0">
+                                <span aria-hidden="true">📷</span>
+                                <span>Replace Reception Hero Photo</span>
+                                <input type="file" accept="image/*" class="sr-only-file" data-upload-target="receptionHeroPhoto" aria-label="Upload new Reception hero photo">
+                            </label>
+                            <button type="button" class="photo-url-btn" data-url-target="receptionHeroPhoto" title="Set Reception photo via URL">🔗 URL</button>
+                        </div>
+
+                        <div class="experience-photo-tag reception-tag">
+                            <span>II • Evening Gala</span>
+                        </div>
+                    </div>
+
+                    <!-- Reception Details + Countdown + Venue + Google Maps Action Grid -->
+                    <div class="experience-details-grid reception-details-surface">
+                        <!-- Left Column: Date, Time & Venue Details -->
+                        <div class="event-logistics">
+                            <div class="logistics-eyebrow reception-eyebrow">
+                                <span>RECEPTION DETAILS</span>
+                                <button type="button" class="inline-edit-trigger reception-edit-btn" data-open-editor-tab="reception" title="Edit Reception Details">
+                                    ✎ Edit Details
+                                </button>
+                            </div>
+
+                            <div class="detail-row">
+                                <div class="detail-icon reception-icon" aria-hidden="true">🌙</div>
+                                <div class="detail-body">
+                                    <span class="detail-label">Event Date</span>
+                                    <strong class="detail-value" data-bind="receptionDateText" data-editable-field="receptionDateText">25 October 2026</strong>
+                                </div>
+                            </div>
+
+                            <div class="detail-row">
+                                <div class="detail-icon reception-icon" aria-hidden="true">🥂</div>
+                                <div class="detail-body">
+                                    <span class="detail-label">Evening Time</span>
+                                    <strong class="detail-value" data-bind="receptionTimeText" data-editable-field="receptionTimeText">7:00 PM Onwards</strong>
+                                </div>
+                            </div>
+
+                            <div class="detail-row">
+                                <div class="detail-icon reception-icon" aria-hidden="true">✨</div>
+                                <div class="detail-body">
+                                    <span class="detail-label">Reception Venue</span>
+                                    <strong class="detail-value" data-bind="receptionVenueName" data-editable-field="receptionVenueName">Reception Venue</strong>
+                                    <p class="detail-subvalue" data-bind="receptionVenueAddress" data-editable-field="receptionVenueAddress">Bangalore, India</p>
+                                </div>
+                            </div>
+
+                            <div class="detail-row">
+                                <div class="detail-icon reception-icon" aria-hidden="true">🎩</div>
+                                <div class="detail-body">
+                                    <span class="detail-label">Aesthetic &amp; Attire Note</span>
+                                    <p class="detail-subvalue" data-bind="receptionNote" data-editable-field="receptionNote">Evening Glamour, Black Tie &amp; Shimmering Regal Wear</p>
+                                </div>
+                            </div>
+
+                            <!-- Action Buttons: Open in Google Maps & Add to Calendar -->
+                            <div class="event-action-bar">
+                                <a
+                                    id="receptionMapLink"
+                                    href="https://www.google.com/maps/search/?api=1&query=Bangalore+India"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    class="btn-maps reception-maps-btn"
+                                >
+                                    <span aria-hidden="true">📍</span>
+                                    <span>Open in Google Maps</span>
+                                    <span class="external-arrow" aria-hidden="true">↗</span>
+                                </a>
+
+                                <button type="button" class="btn-calendar reception-cal-btn" data-calendar-event="reception">
+                                    <span aria-hidden="true">🗓️</span>
+                                    <span>Save to Calendar</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Right Column: Dedicated Reception Countdown Timer -->
+                        <div class="event-countdown-panel reception-countdown-panel">
+                            <div class="countdown-header">
+                                <span class="countdown-kicker">COUNTING DOWN TO THE SOIRÉE</span>
+                                <h3 class="countdown-title">Until The Evening Toast</h3>
+                                <p class="countdown-target-label">
+                                    Target: <span data-bind="receptionDateText">25 October 2026</span> • <span data-bind="receptionTimeText">7:00 PM</span>
+                                </p>
+                            </div>
+
+                            <div class="countdown-grid" id="receptionCountdown" role="timer" aria-live="polite" aria-label="Countdown to the Evening Reception">
+                                <div class="countdown-cell reception-cell">
+                                    <span class="countdown-number" id="receptionDays">00</span>
+                                    <span class="countdown-unit">Days</span>
+                                </div>
+                                <div class="countdown-sep" aria-hidden="true">:</div>
+                                <div class="countdown-cell reception-cell">
+                                    <span class="countdown-number" id="receptionHours">00</span>
+                                    <span class="countdown-unit">Hours</span>
+                                </div>
+                                <div class="countdown-sep" aria-hidden="true">:</div>
+                                <div class="countdown-cell reception-cell">
+                                    <span class="countdown-number" id="receptionMinutes">00</span>
+                                    <span class="countdown-unit">Minutes</span>
+                                </div>
+                                <div class="countdown-sep" aria-hidden="true">:</div>
+                                <div class="countdown-cell reception-cell">
+                                    <span class="countdown-number" id="receptionSeconds">00</span>
+                                    <span class="countdown-unit">Seconds</span>
+                                </div>
+                            </div>
+
+                            <p class="countdown-status-msg" id="receptionCountdownStatus">
+                                Join us as we raise a glass to our new beginning.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===================================================
+             PHOTO GALLERY SECTION: MOMENTS OF US
+             (With individual photo upload/replace controls + Lightbox + Add Photo)
+        ==================================================== -->
+        <section id="gallery" class="gallery-section editorial-section" aria-labelledby="galleryHeading">
+            <div class="container">
+                <div class="section-header reveal-on-scroll">
+                    <span class="chapter-kicker">Chapter III • Visual Folio</span>
+                    <h2 id="galleryHeading" class="section-title" data-bind="galleryTitle" data-editable-field="galleryTitle">Moments Of Us</h2>
+                    <p class="handwritten-accent" data-bind="galleryScript">captured frames of love, laughter &amp; togetherness</p>
+
+                    <div class="gallery-toolbar">
+                        <label class="add-gallery-photo-btn" tabindex="0">
+                            <span aria-hidden="true">＋</span>
+                            <span>Add Couple Photo to Gallery</span>
+                            <input type="file" accept="image/*" multiple id="addGalleryPhotoInput" class="sr-only-file" aria-label="Add one or more photos to the gallery">
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Dynamic Editorial Bento Gallery Grid -->
+                <div id="galleryGrid" class="gallery-bento-grid" aria-live="polite">
+                    <!-- Populated and enhanced by script.js from WEDDING_CONFIG.gallery -->
+                </div>
+            </div>
+        </section>
+
+        <!-- ===================================================
+             FINAL INVITATION & CELEBRATION SECTION
+        ==================================================== -->
+        <section class="final-invitation-section" aria-labelledby="finalHeading">
+            <div class="container">
+                <div class="final-card reveal-on-scroll">
+                    <p class="chapter-kicker">With All Our Heart</p>
+                    <h2 id="finalHeading" class="final-title" data-bind="closingHeading" data-editable-field="closingHeading">
+                        We Would Love To Celebrate With You
+                    </h2>
+                    <p class="handwritten-accent final-script" data-bind="closingScript">
+                        your presence is our greatest blessing
+                    </p>
+                    <div class="ornament-divider" aria-hidden="true">
+                        <span></span>
+                        <span>♥</span>
+                        <span></span>
+                    </div>
+                    <p class="final-message" data-bind="closingMessage" data-editable-field="closingMessage">
+                        Your presence and blessings will make our special day even more unforgettable.
+                    </p>
+
+                    <div class="final-actions">
+                        <button type="button" id="celebrateConfettiBtn" class="celebrate-cta-btn">
+                            <span aria-hidden="true">✨</span>
+                            <span>Shower Blessings &amp; Celebrate</span>
+                            <span aria-hidden="true">♥</span>
+                        </button>
+
+                        <button type="button" id="shareInvitationBtn" class="secondary-outline-btn">
+                            <span aria-hidden="true">💌</span>
+                            <span>Copy Invitation Summary</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ===================================================
+         FOOTER
+    ==================================================== -->
+    <footer class="site-footer">
+        <div class="container footer-inner">
+            <div class="footer-monogram">
+                <span data-bind="groomName">Deepak</span>
+                <span class="footer-amp">&amp;</span>
+                <span data-bind="brideName">Laasya</span>
+            </div>
+            <p class="footer-date" data-bind="heroDateDisplay">25 • OCTOBER • 2026</p>
+            <div class="footer-quick-links">
+                <a href="#hero">Top</a>
+                <span>•</span>
+                <a href="#wedding">Wedding Ceremony</a>
+                <span>•</span>
+                <a href="#reception">Evening Reception</a>
+                <span>•</span>
+                <a href="#gallery">Photo Gallery</a>
+                <span>•</span>
+                <button type="button" class="footer-link-btn" id="footerCustomizeBtn">Customize Invitation</button>
+            </div>
+            <p class="footer-credit">Crafted with ♥ for a timeless beginning</p>
+        </div>
+    </footer>
+
+    <!-- ===================================================
+         LIGHTBOX DIALOG FOR FULLSCREEN GALLERY VIEWING
+    ==================================================== -->
+    <dialog id="lightboxDialog" class="lightbox-dialog" closedby="any" aria-label="Fullscreen Photo Viewer">
+        <div class="lightbox-shell">
+            <button type="button" id="closeLightboxBtn" class="lightbox-close-btn" aria-label="Close photo viewer">✕</button>
+            <button type="button" id="prevLightboxBtn" class="lightbox-nav-btn prev" aria-label="Previous photo">‹</button>
+            <figure class="lightbox-figure">
+                <img id="lightboxImg" src="" alt="" class="lightbox-img">
+                <figcaption id="lightboxCaption" class="lightbox-caption"></figcaption>
+            </figure>
+            <button type="button" id="nextLightboxBtn" class="lightbox-nav-btn next" aria-label="Next photo">›</button>
+        </div>
+    </dialog>
+
+    <!-- ===================================================
+         CONTENT & PHOTO CUSTOMIZATION STUDIO DIALOG
+         (Easily edit all names, photos, dates, times, venues, and Google Maps links)
+    ==================================================== -->
+    <dialog id="editorDialog" class="editor-dialog" closedby="any" aria-labelledby="editorDialogTitle">
+        <div class="editor-shell">
+            <div class="editor-header">
+                <div>
+                    <span class="editor-kicker">LIVE INVITATION STUDIO</span>
+                    <h2 id="editorDialogTitle" class="editor-title">Customize Names, Events, Photos &amp; Map Links</h2>
+                </div>
+                <button type="button" id="closeEditorBtn" class="editor-close-btn" aria-label="Close customization studio">✕</button>
+            </div>
+
+            <!-- Studio Section Tabs -->
+            <div class="editor-tabs" role="tablist" aria-label="Customization categories">
+                <button type="button" role="tab" aria-selected="true" class="editor-tab active" data-tab="couple">Couple &amp; Hero</button>
+                <button type="button" role="tab" aria-selected="false" class="editor-tab" data-tab="wedding">Wedding Ceremony</button>
+                <button type="button" role="tab" aria-selected="false" class="editor-tab" data-tab="reception">Evening Reception</button>
+                <button type="button" role="tab" aria-selected="false" class="editor-tab" data-tab="story">Story &amp; Gallery</button>
+                <button type="button" role="tab" aria-selected="false" class="editor-tab" data-tab="export">Export / Reset</button>
+            </div>
+
+            <form id="invitationEditorForm" class="editor-body" novalidate>
+                <!-- TAB 1: COUPLE & HERO -->
+                <div class="editor-panel active" data-panel="couple" role="tabpanel">
+                    <p class="editor-help">All changes update the invitation immediately and save automatically in your browser.</p>
+
+                    <div class="form-row-2">
+                        <div class="form-group">
+                            <label for="inputGroomName">Partner 1 / Groom Name</label>
+                            <input type="text" id="inputGroomName" name="groomName" required placeholder="e.g. Deepak">
+                        </div>
+                        <div class="form-group">
+                            <label for="inputBrideName">Partner 2 / Bride Name</label>
+                            <input type="text" id="inputBrideName" name="brideName" required placeholder="e.g. Laasya">
+                        </div>
+                    </div>
+
+                    <div class="form-row-2">
+                        <div class="form-group">
+                            <label for="inputHeroPreTitle">Hero Eyebrow Line</label>
+                            <input type="text" id="inputHeroPreTitle" name="heroPreTitle" placeholder="TOGETHER WITH THEIR FAMILIES">
+                        </div>
+                        <div class="form-group">
+                            <label for="inputHeroDateDisplay">Hero Display Date</label>
+                            <input type="text" id="inputHeroDateDisplay" name="heroDateDisplay" placeholder="25 • OCTOBER • 2026">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="inputHeroTagline">Hero Romantic Tagline</label>
+                        <input type="text" id="inputHeroTagline" name="heroTagline" placeholder="Two souls. One heart. One beautiful forever.">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Hero Couple Photo</label>
+                        <div class="editor-photo-control">
+                            <input type="text" id="inputHeroPhotoUrl" name="heroPhoto" placeholder="images/hero-couple.jpg or image URL">
+                            <label class="editor-upload-btn" tabindex="0">
+                                <span>Upload File</span>
+                                <input type="file" accept="image/*" class="sr-only-file" data-upload-target="heroPhoto">
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- TAB 2: WEDDING CEREMONY -->
+                <div class="editor-panel" data-panel="wedding" role="tabpanel" hidden>
+                    <p class="editor-help">Configure the warm romantic floral Wedding Ceremony details, countdown target, and Google Maps link.</p>
+
+                    <div class="form-row-2">
+                        <div class="form-group">
+                            <label for="inputWeddingTitle">Event Heading</label>
+                            <input type="text" id="inputWeddingTitle" name="weddingTitle" placeholder="The Wedding Ceremony">
+                        </div>
+                        <div class="form-group">
+                            <label for="inputWeddingDateISO">Countdown Date &amp; Time</label>
+                            <input type="datetime-local" id="inputWeddingDateISO" name="weddingDateISO">
+                        </div>
+                    </div>
+
+                    <div class="form-row-2">
+                        <div class="form-group">
+                            <label for="inputWeddingDateText">Displayed Date Text</label>
+                            <input type="text" id="inputWeddingDateText" name="weddingDateText" placeholder="25 October 2026">
+                        </div>
+                        <div class="form-group">
+                            <label for="inputWeddingTimeText">Displayed Time Text</label>
+                            <input type="text" id="inputWeddingTimeText" name="weddingTimeText" placeholder="10:00 AM Onwards">
+                        </div>
+                    </div>
+
+                    <div class="form-row-2">
+                        <div class="form-group">
+                            <label for="inputWeddingVenueName">Wedding Venue Name</label>
+                            <input type="text" id="inputWeddingVenueName" name="weddingVenueName" placeholder="Enter Wedding Venue Name">
+                        </div>
+                        <div class="form-group">
+                            <label for="inputWeddingVenueAddress">Venue City / Full Address</label>
+                            <input type="text" id="inputWeddingVenueAddress" name="weddingVenueAddress" placeholder="Bangalore, India">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="inputWeddingMapUrl">Google Maps Link (URL)</label>
+                        <input type="url" id="inputWeddingMapUrl" name="weddingMapUrl" placeholder="https://maps.google.com/...">
+                        <small class="field-hint">Leave blank or paste any Google Maps share link; if blank, it automatically searches your Venue Name &amp; Address.</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="inputWeddingNote">Dress Code / Ceremony Note</label>
+                        <input type="text" id="inputWeddingNote" name="weddingNote" placeholder="Traditional Indian or Pastel Floral Festive Attire">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Wedding Ceremony Hero Photo</label>
+                        <div class="editor-photo-control">
+                            <input type="text" id="inputWeddingHeroPhoto" name="weddingHeroPhoto" placeholder="images/wedding-hero.jpg">
+                            <label class="editor-upload-btn" tabindex="0">
+                                <span>Upload File</span>
+                                <input type="file" accept="image/*" class="sr-only-file" data-upload-target="weddingHeroPhoto">
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- TAB 3: EVENING RECEPTION -->
+                <div class="editor-panel" data-panel="reception" role="tabpanel" hidden>
+                    <p class="editor-help">Configure the dramatic evening Reception details, countdown target, and Google Maps link.</p>
+
+                    <div class="form-row-2">
+                        <div class="form-group">
+                            <label for="inputReceptionTitle">Event Heading</label>
+                            <input type="text" id="inputReceptionTitle" name="receptionTitle" placeholder="The Evening Reception">
+                        </div>
+                        <div class="form-group">
+                            <label for="inputReceptionDateISO">Countdown Date &amp; Time</label>
+                            <input type="datetime-local" id="inputReceptionDateISO" name="receptionDateISO">
+                        </div>
+                    </div>
+
+                    <div class="form-row-2">
+                        <div class="form-group">
+                            <label for="inputReceptionDateText">Displayed Date Text</label>
+                            <input type="text" id="inputReceptionDateText" name="receptionDateText" placeholder="25 October 2026">
+                        </div>
+                        <div class="form-group">
+                            <label for="inputReceptionTimeText">Displayed Time Text</label>
+                            <input type="text" id="inputReceptionTimeText" name="receptionTimeText" placeholder="7:00 PM Onwards">
+                        </div>
+                    </div>
+
+                    <div class="form-row-2">
+                        <div class="form-group">
+                            <label for="inputReceptionVenueName">Reception Venue Name</label>
+                            <input type="text" id="inputReceptionVenueName" name="receptionVenueName" placeholder="Enter Reception Venue Name">
+                        </div>
+                        <div class="form-group">
+                            <label for="inputReceptionVenueAddress">Venue City / Full Address</label>
+                            <input type="text" id="inputReceptionVenueAddress" name="receptionVenueAddress" placeholder="Bangalore, India">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="inputReceptionMapUrl">Google Maps Link (URL)</label>
+                        <input type="url" id="inputReceptionMapUrl" name="receptionMapUrl" placeholder="https://maps.google.com/...">
+                        <small class="field-hint">Paste your exact Google Maps share link or leave blank to auto-link to your Reception Venue address.</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="inputReceptionNote">Dress Code / Evening Note</label>
+                        <input type="text" id="inputReceptionNote" name="receptionNote" placeholder="Evening Glamour, Black Tie & Shimmering Regal Wear">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Evening Reception Hero Photo</label>
+                        <div class="editor-photo-control">
+                            <input type="text" id="inputReceptionHeroPhoto" name="receptionHeroPhoto" placeholder="images/reception-hero.jpg">
+                            <label class="editor-upload-btn" tabindex="0">
+                                <span>Upload File</span>
+                                <input type="file" accept="image/*" class="sr-only-file" data-upload-target="receptionHeroPhoto">
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- TAB 4: STORY & GALLERY -->
+                <div class="editor-panel" data-panel="story" role="tabpanel" hidden>
+                    <div class="form-group">
+                        <label for="inputStorySubheading">Story Headline</label>
+                        <input type="text" id="inputStorySubheading" name="storySubheading">
+                    </div>
+                    <div class="form-group">
+                        <label for="inputStoryParagraph1">Story Paragraph 1</label>
+                        <textarea id="inputStoryParagraph1" name="storyParagraph1" rows="2"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputStoryParagraph2">Story Paragraph 2</label>
+                        <textarea id="inputStoryParagraph2" name="storyParagraph2" rows="3"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Story Portrait Photo</label>
+                        <div class="editor-photo-control">
+                            <input type="text" id="inputStoryPhoto" name="storyPhoto" placeholder="images/gallery-2.jpg">
+                            <label class="editor-upload-btn" tabindex="0">
+                                <span>Upload File</span>
+                                <input type="file" accept="image/*" class="sr-only-file" data-upload-target="storyPhoto">
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- TAB 5: EXPORT CONFIG OR RESET -->
+                <div class="editor-panel" data-panel="export" role="tabpanel" hidden>
+                    <p class="editor-help">
+                        Copy this configuration JSON to save permanently in <code>script.js</code> (<code>DEFAULT_WEDDING_CONFIG</code>), or reset all customizations back to the initial template.
+                    </p>
+                    <div class="form-group">
+                        <label for="configJsonOutput">Current Configuration JSON</label>
+                        <textarea id="configJsonOutput" rows="8" readonly class="code-textarea"></textarea>
+                    </div>
+                    <div class="export-actions-row">
+                        <button type="button" id="copyConfigJsonBtn" class="editor-save-btn">📋 Copy Config JSON</button>
+                        <button type="button" id="downloadConfigJsonBtn" class="secondary-outline-btn">⬇ Download JSON</button>
+                        <button type="button" id="resetDefaultConfigBtn" class="danger-outline-btn">↺ Reset All to Default</button>
+                    </div>
+                </div>
+
+                <div class="editor-footer">
+                    <span class="autosave-indicator" id="autosaveStatus">✓ Saved automatically</span>
+                    <div class="editor-footer-btns">
+                        <button type="button" id="doneEditingBtn" class="editor-save-btn">Done</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </dialog>
+
+    <!-- Toast Notification for Feedback -->
+    <div id="toastContainer" class="toast-container" aria-live="polite" aria-atomic="true"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>
